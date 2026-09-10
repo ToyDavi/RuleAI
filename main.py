@@ -12,14 +12,19 @@ NOME_DA_IA = "RuleAI"
  
 # Palavras banidas checadas por PALAVRA INTEIRA (evita falso positivo tipo "cu" em "cultura")
 PALAVRAS_PROIBIDAS = ["cu", "xoxota", "xereca", "roubar", "bunda"]
- 
+PALAVRAS_GRANDES = ["merda", "porra", "pourra", "caralho", "porrada", "pola"]
  
 def contem_palavra_proibida(frase):
     for palavra in PALAVRAS_PROIBIDAS:
         if re.search(r"\b" + re.escape(palavra) + r"\b", frase):
             return True
     return False
- 
+
+def contem_palavra_grande(frase):
+    for palavra in PALAVRAS_GRANDES:
+        if re.search(r"\b" + re.escape(palavra) + r"\b", frase):
+            return True
+    return False
  
 def GerarTotal(frase, emocao):
     frasesFeliz = ["Claro! Vamos nessa.", "Mandou bem! Bora lá.", "Opa! Bora nessa?"]
@@ -72,7 +77,18 @@ def GerarFraseInicial(emocao, nomeDaIA):
     else:
         return f"Olá, eu sou a {nomeDaIA}. Em que posso te ajudar hoje?"
  
- 
+ def GerarFrasePalavrao():
+  frasesGulosas = [
+   "(Vamos maneirar no palavrão, ok?)",
+   "(Segura a onda aí no palavrão!)",
+   "(Seus parentes não iriam gostar de ver você falando tanto palavrão, iam?)",
+   "(Não fale palavrinhas feias!)",
+   "(Falar palavrão é errado.)",
+   "(Como você consegue falar 10 palavrões a cada 9 palavras?)"
+  ]
+  return random.choice(frasesGulosas)
+
+
 def GerarFrase(prompt):
     frase = prompt.lower()
     for caractere in ["!", "?", ".", ",", ";", ":", "[", "]", "{", "}", "%", "$"]:
@@ -81,7 +97,12 @@ def GerarFrase(prompt):
     # Checagem de conteúdo proibido ANTES de qualquer outra lógica -> retorno imediato
     if contem_palavra_proibida(frase):
         return "Sou apenas uma Inteligência Artificial baseada em regras e não posso ajudar com isso."
- 
+
+   complemento = ""
+
+   if contem_palavra_grande(prompt):
+    complemento = GerarFrasePalavrao()
+
     lista = []
     saudacoes = [
         "oi", "olá", "oii", "e aí", "eae", "eaew", "fala",
@@ -175,7 +196,7 @@ def GerarFrase(prompt):
     if lista == ["raiva"]:
         fraseComEmocao = GerarFraseInicial("raiva", NOME_DA_IA)
  
-    return fraseComEmocao
+    return fraseComEmocao + (" " + complemento if complemnto else "")
  
  
 @app.route("/gerar", methods=["POST"])
