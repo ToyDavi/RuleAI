@@ -100,8 +100,8 @@ def GerarFrase(prompt):
 
    complemento = ""
 
-   if contem_palavra_grande(prompt):
-    complemento = GerarFrasePalavrao()
+    if contem_palavra_grande(prompt):
+     complemento = GerarFrasePalavrao()
 
     lista = []
     saudacoes = [
