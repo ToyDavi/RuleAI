@@ -77,16 +77,16 @@ def GerarFraseInicial(emocao, nomeDaIA):
     else:
         return f"Olá, eu sou a {nomeDaIA}. Em que posso te ajudar hoje?"
  
- def GerarFrasePalavrao():
-  frasesGulosas = [
-   "(Vamos maneirar no palavrão, ok?)",
-   "(Segura a onda aí no palavrão!)",
-   "(Seus parentes não iriam gostar de ver você falando tanto palavrão, iam?)",
-   "(Não fale palavrinhas feias!)",
-   "(Falar palavrão é errado.)",
-   "(Como você consegue falar 10 palavrões a cada 9 palavras?)"
-  ]
-  return random.choice(frasesGulosas)
+def GerarFrasePalavrao():
+ frasesGulosas = [
+  "(Vamos maneirar no palavrão, ok?)",
+  "(Segura a onda aí no palavrão!)",
+  "(Seus parentes não iriam gostar de ver você falando tanto palavrão, iam?)",
+  "(Não fale palavrinhas feias!)",
+  "(Falar palavrão é errado.)",
+  "(Como você consegue falar 10 palavrões a cada 9 palavras?)"
+ ]
+ return random.choice(frasesGulosas)
 
 
 def GerarFrase(prompt):
