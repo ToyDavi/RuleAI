@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import random
 import os
 import re
  
 porta = int(os.environ.get("PORT", 5000))
 app = Flask(__name__)
+CORS(app)  # libera acesso de qualquer origem (ajuste com origins=[...] se quiser restringir)
  
 NOME_DA_IA = "RuleAI"
  
